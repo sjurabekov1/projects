@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package user;
+import "post.proto";
+
+service UserService {
+    rpc CreateUser(User) returns (User);
+    rpc UpdateUser(User) returns (UpdateUserResponse);
+    rpc GetUserById(GetUserByIdRequest) returns (User);
+    rpc GetUserList(GetUsersRequest) returns (GetUsersResponse);
+}
+
+message GetUsersRequest {
+    int64 limit = 1;
+    int64 page = 2;
+}
+
+message GetUsersResponse { 
+    repeated User users = 1;
+    int64 count = 2;
+}
+
+
+message GetUserByIdRequest {
+    string user_id = 1;
+}
+
+message User {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    repeated Post posts = 4;
+}
+
+message UpdateUserResponse {
+    string id = 1;
+}
